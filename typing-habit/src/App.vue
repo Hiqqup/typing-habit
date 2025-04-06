@@ -1,47 +1,73 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <span v-html="typedSpans" ></span>
+    <span class="cursor">|</span>
+    <span class="untyped">{{ quote }}</span>
+    <div>{{ debug }}</div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script lang="ts">
+  type TypedOutLetter  ={
+    letter: string,
+    correct: boolean
+  };
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+  import { defineComponent } from 'vue';
+  export default defineComponent({
+    name: "App",
+    components: {},
+    mounted() {
+      document.addEventListener("keydown", this.handleKeyDown );
+    },
+    unmounted() {
+      document.removeEventListener("keydown", this.handleKeyDown );
+    },
+    data(){
+      return{
+        quote: "There is nothing permanent except change",
+        typed: [] as Array<TypedOutLetter>,
+        wronglyTyped: "",
+        typedSpans:"",
+        debug: "",
+      }
+    },
+    methods:{
+      matchQuote(letter: string){
+        if(letter === this.quote.charAt(0)){
+          this.quote = this.quote.substring(1);
+          this.typed.push({letter, correct: true});
+        }
+        //else if(letter!== " "){ }
+        else {
+          letter =this.quote.charAt(0)
+          this.typed.push({letter, correct: false});
+          this.quote = this.quote.substring(1);
+        }
+      },
+      getTypedSpans(){
+        let res = "";
+        this.typed.forEach(tol => {
+          res+=`<span class="${tol.correct? "typed" : "wronglyTyped"}">${tol.letter}</span>`;
+        });
+        return res;
+      },
+      handleBackspace(){
+        const lastTypedLetter = this.typed[this.typed.length-1].letter;
+        if (lastTypedLetter == " ") return;
+        this.typed.pop();
+        this.quote = lastTypedLetter + this.quote;
+      },
+      handleKeyDown(e: Event){
+          if (e instanceof KeyboardEvent){
+            if(e.key.length === 1) this.matchQuote(e.key);
+            else if(e.key == "Backspace") this.handleBackspace();
+            this.typedSpans = this.getTypedSpans();
+        }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+      },
+    }
+  });
+</script>
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+<style>
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
