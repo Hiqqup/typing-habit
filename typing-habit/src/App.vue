@@ -1,4 +1,9 @@
+    <script setup lang="ts">
+  import Ping from "./components/Ping.vue";
+</script>
 <template>
+
+  <Ping></Ping>
   <span v-html="typedSpans" ></span>
     <span class="cursor">|</span>
     <span class="untyped">{{ quote }}</span>
@@ -14,7 +19,6 @@
   import { defineComponent } from 'vue';
   export default defineComponent({
     name: "App",
-    components: {},
     mounted() {
       document.addEventListener("keydown", this.handleKeyDown );
     },
@@ -31,6 +35,9 @@
       }
     },
     methods:{
+
+
+
       matchQuote(letter: string){
         if(letter === this.quote.charAt(0)){
           this.quote = this.quote.substring(1);
@@ -67,7 +74,3 @@
     }
   });
 </script>
-
-<style>
-
-</style>

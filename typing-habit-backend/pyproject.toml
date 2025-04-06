@@ -6,12 +6,13 @@ authors = [
     {name = "hiqqup",email = "71655937+Hiqqup@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.9,<4.0"
 dependencies = [
     "flask (>=3.1.0,<4.0.0)",
     "requests (>=2.32.3,<3.0.0)",
     "beautifulsoup4 (>=4.13.3,<5.0.0)",
-    "lxml (>=5.3.2,<6.0.0)"
+    "lxml (>=5.3.2,<6.0.0)",
+    "flask-cors (>=5.0.1,<6.0.0)"
 ]
 
 [tool.poetry]
