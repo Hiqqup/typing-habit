@@ -16,15 +16,18 @@ for blockquote in soup.find_all("blockquote"):
 values = ""
 author = "James Clear"
 for quote in quotes:
-    values+= "({quote},{author}),".format(quote=quote, author = author)
+    values+= '("{quote}","{author}"),'.format(quote=quote, author = author)
+values = values[:-1]
+values+= ';'
 
 dbName = "quotes"
 conn = sqlite3.connect(dbName+".db")
 cursor = conn.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS {dbName}
-             (quote, autor)'''.format(dbName = dbName))
+             UNIQUE(quote, autor)'''.format(dbName = dbName))
 
 # Insert a row of data
-cursor.execute("INSERT INTO {dbName} VALUES {values}".format(dbName = dbName, values= values))
+sql = "INSERT INTO {dbName} VALUES {values}".format(dbName = dbName, values= values)
+print(sql)
 conn.commit()
 conn.close()
