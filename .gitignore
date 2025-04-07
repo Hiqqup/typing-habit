@@ -3,3 +3,4 @@ node_modules
 quotes.db
 __pycache__
 dist
+flask-app/templates/index.html
