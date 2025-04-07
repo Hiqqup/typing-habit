@@ -1,13 +1,11 @@
     <script setup lang="ts">
-  import Ping from "./components/Ping.vue";
 </script>
 <template>
 
-  <Ping></Ping>
   <span v-html="typedSpans" ></span>
     <span class="cursor">|</span>
     <span class="untyped">{{ quote }}</span>
-    <div>{{ debug }}</div>
+    <div>{{ results }}</div>
 </template>
 
 <script lang="ts">
@@ -16,10 +14,12 @@
     correct: boolean
   };
 
+  import axios from 'axios';
   import { defineComponent } from 'vue';
   export default defineComponent({
     name: "App",
     mounted() {
+      this.getQuote();
       document.addEventListener("keydown", this.handleKeyDown );
     },
     unmounted() {
@@ -27,21 +27,38 @@
     },
     data(){
       return{
-        quote: "There is nothing permanent except change",
+        author: "",
+        quote: "",
         typed: [] as Array<TypedOutLetter>,
         wronglyTyped: "",
         typedSpans:"",
-        debug: "",
+        results: "",
       }
     },
     methods:{
+      getQuote() {
+        //const path = 'http://localhost:5000/ping';
+        const path = 'https://hiqqup.pythonanywhere.com/ping';
+        axios.get(path)
+          .then((res) => {
+            this.quote = res.data.quote;
+            this.author = res.data.author
+          })
+          .catch((error) => {
 
+            console.error(error);
+          });
 
-
+      },
+      showResults(){
+        this.results = "by " + this.author;
+        this.typed.push({letter: " ", correct: true});
+      },
       matchQuote(letter: string){
         if(letter === this.quote.charAt(0)){
           this.quote = this.quote.substring(1);
           this.typed.push({letter, correct: true});
+          if(this.quote.length == 0) this.showResults();
         }
         //else if(letter!== " "){ }
         else {
