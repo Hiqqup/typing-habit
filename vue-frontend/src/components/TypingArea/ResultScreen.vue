@@ -66,17 +66,22 @@ import type { ResultParameters } from './TypingField/TypingField.vue';
                 results: "",
                 wpm: 0,
                 author: "",
+                chart: null as null | ReturnType<typeof displayResultChart>,
             };
         },
         methods:{
+            destoryChart(){
+                this.chart?.destroy();
+            },
             showResults(parameters: ResultParameters){
+                console.log(parameters);
                 const wordCount = parameters.originalQuote.split(" ").length;
                 const time = parameters.timeStamps[parameters.timeStamps.length -1] - parameters.timeStamps[0] 
                 const wpm = wordCount/(time/60000)
                 this.wpm = Math.round(wpm);
                 parameters.wordCount = wordCount;
                 this.author = parameters.author;
-                displayResultChart(parameters);
+                this.chart  = displayResultChart(parameters);
             }    
         }
     };

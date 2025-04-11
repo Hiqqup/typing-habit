@@ -27,6 +27,7 @@ import ResultScreen from './ResultScreen.vue';
         methods:{
             reset(){
                 this.showTypingField = true;
+                    (this.$refs.result_screen as  InstanceType<typeof ResultScreen>).destoryChart();
                  (this.$refs.typing_field as  InstanceType<typeof TypingField>).reset()               
             },
             showResults(parameters: ResultParameters){

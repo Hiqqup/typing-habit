@@ -38,8 +38,7 @@ function displayResultChart(parameters:ResultParameters){
         size: 14,
     };
     Chart.defaults.color = UNTYPED_COLOR;
-    console.log(xValues);
-    new Chart("resultChart", {
+    return new Chart("resultChart", {
       type: "line",
       data: {
         labels: xValues,
