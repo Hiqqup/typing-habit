@@ -25,7 +25,7 @@
 </template>
 
 
-<style>
+<style scoped>
     .logoAndH1{
         display: flex;
         align-items: center;
@@ -37,17 +37,9 @@
     path.logo{
         fill: var(--logo-color);
     }
-    header{
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
     h1{
         text-align: left;
         font-size: 42px;
-    }
-    body{
-        margin:0 80px;
     }
 
 </style>

@@ -1,8 +1,9 @@
-
 from flask import Flask, redirect,url_for, render_template
 from flask_cors import CORS
 import sqlite3
 import json
+import os
+
 
 dbName = "quotes"
 def fetchQuote():
@@ -23,9 +24,8 @@ def index():
 
 
 
-@app.route('/ping', methods=['GET'])
+@app.route('/ping')
 def quote():
     quote = fetchQuote()
     return json.dumps({"quote": quote[0], "author": quote[1]})
-
 

@@ -5,7 +5,7 @@
       </svg>
     </a>
 </template>
-<style>
+<style scoped>
 .myGithub{
     transform: scale(2);
 }
