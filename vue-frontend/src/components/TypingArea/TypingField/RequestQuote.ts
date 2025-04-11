@@ -6,7 +6,9 @@ const path = 'https://hiqqup.pythonanywhere.com/ping';
 axios.get(path)
   .then((res) => {
     this.quote = res.data.quote;
-    this.author = res.data.author
+    this.resultParameters.author = res.data.author
+    this.resultParameters.originalQuote = this.quote;
+    //this.quote="ea"
   })
   .catch((error) => {
 

@@ -3,7 +3,6 @@
   <span v-html="typedSpans" ></span>
     <span class="cursor">|</span>
     <span class="untyped">{{ quote }}</span>
-    <div>{{ results }}</div>
         </div>
 </template>
 
@@ -15,6 +14,7 @@
 
 .wronglyTyped{
     color: var(--wrongly-typed-color);
+    text-decoration: underline;
 }
 .cursor{
     color: var(--logo-color);
@@ -24,31 +24,47 @@
 </style>
 <script lang="ts">
 
-import { handleBackspace, handleKeyDown, type TypedOutLetter } from './HandleInput';
+import { unsetTyping } from './ChangeTypingState';
+import { handleKeyDown, type TypedOutLetter } from './HandleInput';
 import { getQuote } from './RequestQuote';
 import { matchQuote } from './TypingLogic';
+
+  function getInitialData(){
+   return{
+        quote: "",
+        typed: [] as Array<TypedOutLetter>,
+        typedSpans:"",
+        
+        resultParameters:{
+          originalQuote: "",
+          timeStamps: [] as Array<number>,
+          author: "",
+          wordCount: 0,
+        }
+      }
+  }
+
+  export type ResultParameters = ReturnType<typeof getInitialData>["resultParameters"];
 
   export default {
     name: "TyingField",
     data(){
-      return{
-        author: "",
-        quote: "",
-        typed: [] as Array<TypedOutLetter>,
-        wronglyTyped: "",
-        typedSpans:"",
-        results: "",
-      }
-    },
+      return getInitialData();
+     },
     methods:{
+      reset(){
+        Object.assign(this.$data, getInitialData());
+        this.getQuote();
+      },
       showResults(){
-        this.results = "by " + this.author;
-        this.typed.push({letter: " ", correct: true});
+        this.resultParameters.timeStamps.push((new Date()).getTime());
+        unsetTyping();
+        this.$emit("showResults", this.resultParameters);
       },
       getQuote,
       matchQuote,
       handleKeyDown,
-      handleBackspace,
+      
     },
     mounted() {
       this.getQuote();

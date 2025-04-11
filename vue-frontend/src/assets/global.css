@@ -17,13 +17,20 @@
     --untyped-text-color: #c8c8c8;
     --background-color: #323437;
     --wrongly-typed-color: #be4147;
+    
+    /* state variables */
+    --icon-visibility:visible; /* or hidden*/
+    --actual-title-color: var(--title-active-color); /* or --navbar-icon-color*/
 }
 body {
-  font-family: 'Roboto Mono';
+  font-family: 'roboto mono';
   text-align: center;
   background: var(--background-color);
   color: var(--untyped-text-color);
   margin:0 80px;
+}
+svg{
+  visibility:var(--icon-visibility);
 }
 div#app{
       height: 83vh;
