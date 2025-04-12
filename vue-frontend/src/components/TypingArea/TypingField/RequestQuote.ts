@@ -1,8 +1,7 @@
 import axios from 'axios';
-//import type TypingField from "./TypingField.vue";
+import { baseUrl } from '@/components/BaseUrl';
 function getQuote(this: any/*InstanceType<typeof TypingField>*/) {
-//const path = 'http://localhost:5000/ping';
-const path = 'https://hiqqup.pythonanywhere.com/ping';
+  const path = baseUrl+"getQuote";
 axios.get(path)
   .then((res) => {
     this.quote = res.data.quote;

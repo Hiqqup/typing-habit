@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import TypingField, { type ResultParameters } from './TypingField/TypingField.vue';
-import ResultScreen from './ResultScreen.vue';
+import ResultScreen from './ResultScreen/ResultScreen.vue';
 </script>
 <template>
 

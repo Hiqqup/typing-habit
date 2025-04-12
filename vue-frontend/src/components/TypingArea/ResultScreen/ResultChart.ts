@@ -1,5 +1,5 @@
 import { Chart, type Color } from 'chart.js/auto';
-import type { ResultParameters } from './TypingField/TypingField.vue';
+import type { ResultParameters } from "@/components/TypingArea/TypingField/TypingField.vue"
 
 
 const LOGO_COLOR = "#42b883";
@@ -32,7 +32,7 @@ function getXValues(wordCount:number){
   return res;
 }
 function displayResultChart(parameters:ResultParameters){
-    const xValues = getXValues(parameters.wordCount);
+    const xValues = getXValues(parameters.correctlyTypedWordCount);
     Chart.defaults.font = {
         family: 'Roboto Mono',
         size: 14,

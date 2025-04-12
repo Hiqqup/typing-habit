@@ -39,7 +39,7 @@ import { matchQuote } from './TypingLogic';
           originalQuote: "",
           timeStamps: [] as Array<number>,
           author: "",
-          wordCount: 0,
+          correctlyTypedWordCount: 0,
         }
       }
   }

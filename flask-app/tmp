@@ -1,0 +1,14 @@
+    conn = sqlite3.connect(resultDb+".db")
+    cursor = conn.cursor()
+    #create table if not exists
+    cursor.execute('''CREATE TABLE IF NOT EXISTS {dbName}(
+                        user STRING,
+                        wpm INTEGER,
+                        UNIQUE(user, wpm)
+                        );
+                 '''.format(dbName = resultDb))
+    #check wether data should be inserted
+    cursor.execute( "select * from {dbName} WHERE user ={userName};".format(dbName= quoteDb, userName = data.lbName))
+    wpmPersonalBest = cursor.fetchone()
+    print(wpmPersonalBest)
+    #insert data

@@ -57,7 +57,8 @@
 </style>
 <script lang="ts">
 import { displayResultChart } from './ResultChart';
-import type { ResultParameters } from './TypingField/TypingField.vue';
+import type { ResultParameters } from "@/components/TypingArea/TypingField/TypingField.vue"
+import { submitResults } from './SubmitResult';
 
     export default{
         props: ["resultParameters"],
@@ -74,14 +75,12 @@ import type { ResultParameters } from './TypingField/TypingField.vue';
                 this.chart?.destroy();
             },
             showResults(parameters: ResultParameters){
-                console.log(parameters);
-                const wordCount = parameters.originalQuote.split(" ").length;
                 const time = parameters.timeStamps[parameters.timeStamps.length -1] - parameters.timeStamps[0] 
-                const wpm = wordCount/(time/60000)
+                const wpm = parameters.correctlyTypedWordCount/(time/60000)
                 this.wpm = Math.round(wpm);
-                parameters.wordCount = wordCount;
                 this.author = parameters.author;
                 this.chart  = displayResultChart(parameters);
+                submitResults(this.wpm);
             }    
         }
     };

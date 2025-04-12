@@ -3,6 +3,7 @@ import { setTyping, unsetTyping } from "./ChangeTypingState";
   type TypedOutLetter  ={
     letter: string,
     correct: boolean
+    cantDelete: boolean
   };
 //functions that do not access the component
 function setTypingState(str: string){
@@ -28,8 +29,7 @@ function  getTypedSpans(typed:Array<TypedOutLetter>){
 // functions that alter the component (notice this type )
 function handleBackspace(this: InstanceType<typeof TypingField>){
     const lastTypedLetter = this.typed[this.typed.length-1].letter;
-    const correct = this.typed[this.typed.length-1].correct
-    if (lastTypedLetter == " " && correct) return;
+    if (this.typed[this.typed.length-1].cantDelete) return;
     this.typed.pop();
     this.quote = lastTypedLetter + this.quote;
 }
