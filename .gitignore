@@ -1,6 +1,6 @@
 env
 node_modules
-quotes.db
+*.db
 __pycache__
 dist
 flask-app/templates/index.html

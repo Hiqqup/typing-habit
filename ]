@@ -1,0 +1,53 @@
+<template>
+    <div>top 10:</div>
+    <table v-html="tableHtml">
+    </table>
+</template>
+<style scoped> 
+
+</style>
+<script lang="ts">
+import axios, { Axios } from 'axios';
+import { baseUrl } from '@/components/BaseUrl';
+export default{
+    data(){
+        return {
+            tableHtml:"",
+            serverResponse:""
+        }
+    },
+    mounted(){
+        this.requestData();
+    },
+    methods:{
+        requestData(){
+            axios.get(baseUrl+"getLeaderboard")
+              .then((res) => {
+                this.generateTableHtml(res.data)
+              })
+              .catch((error) => {
+
+                console.error(error);
+              });
+        },
+        generateTableHtml(data: string){
+           let ret = ""; 
+           console.log(data);
+           const lbArr = 
+           for(const entry in lbArr){
+            ret+= `
+                <tr>
+                    <td>${entry[0]}</td>
+                    <td>${entry[1]}</td>
+                </tr>
+            `;
+           }
+           return ret;
+        }
+
+    }
+}
+    
+
+
+</script>

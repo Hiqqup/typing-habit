@@ -14,7 +14,16 @@ def fetchQuote():
     row = cur.fetchone()
     return row
 
+
 resultDb = "leaderboard"
+
+def fetchLeaderboard():
+    conn = sqlite3.connect(resultDb+".db")
+    cur = conn.cursor()
+    cur.execute( "select * from {dbName} order by wpm desc".format(dbName= resultDb))
+    res = cur.fetchmany(10)
+    return res
+
 def submitResults(data):
     conn = sqlite3.connect(resultDb+".db")
     cursor = conn.cursor()
@@ -57,6 +66,11 @@ def index():
 def quote():
     quote = fetchQuote()
     return json.dumps({"quote": quote[0], "author": quote[1]})
+
+@app.route('/getLeaderboard', methods=['GET'])
+def leaderboard():
+    res = fetchLeaderboard()
+    return json.dumps(res)
 
 
 @app.route('/submitResults', methods=['POST'])

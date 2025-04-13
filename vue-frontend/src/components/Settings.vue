@@ -2,21 +2,14 @@
     <div class="leaderboardName">
     <p>Leaderboard Name: </p>
     <input v-model="leaderBoardName"  type="text" placeholder="Your Leaderboard Name ">
-    <button @click="saveLeaderBoardName">Save</button>
+    <button @click="saveLeaderBoardName">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" ><path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z"/></svg>
+    </button>
     </div>
 
 </template>
 <style scoped>
 
-:root{
-    /*colors*/
-    --logo-color: #42b883;
-    --title-active-color: #e5e2cb;
-    --navbar-icon-color: #8e8e8e;
-    --untyped-text-color: #c8c8c8;
-    --background-color: #323437;
-    --wrongly-typed-color: #be4147;
-}
     
 p{
     font-size: 20px;
@@ -41,19 +34,26 @@ p{
 .leaderboardName > button,
 .leaderboardName > input{
     font-size: 16px;
-    border: var(--navbar-icon-color) 2px solid;
     border-radius: 5px;
     padding: 4px 2px;
-    color: var(--untyped-text-color)
+    color: var(--untyped-text-color);
+    fill: var(--untyped-text-color);
+    background-color: var(--darker-background-color) ;
+    border: none;
+}
+.leaderboardName > button:hover{
+    color: var(--background-color);
+    fill: var(--background-color);
+    background-color: var(--untyped-text-color);
 }
 .leaderboardName > button:active{
-    border: var(--untyped-text-color) 2px solid;
-    transform: translateY(1px);
-    
+    color: var(--untyped-text-color);
+    fill: var(--untyped-text-color);
+    background-color: var(--navbar-icon-color);
 }
 .leaderboardName > button{
-    background-color: var(--background-color);
     font-family: "Roboto Mono";
+    padding:  2px 8px;
 }
     
 </style>

@@ -3,6 +3,7 @@
   import Navbar, { MainContent } from './components/Navbar.vue';
   import Github from './components/Github.vue';
   import Settings from "./components/Settings.vue";
+  import Leaderboard from './components/Leaderboard.vue';
 </script>
 <template>
   <header>
@@ -13,6 +14,7 @@
   <main>
     <TypingArea v-if="showInMain === MainContent.Typing"></TypingArea>
     <Settings v-if="showInMain === MainContent.Settings"></Settings>
+    <Leaderboard v-if="showInMain === MainContent.Leaderboard"></Leaderboard>
   </main>
   <footer>
     <Github></Github>
