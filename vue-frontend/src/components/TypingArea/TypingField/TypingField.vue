@@ -7,16 +7,16 @@
 </template>
 
 
-<style > /*scoped -- i would like this to be scoped*/
-.typed{
+<style scoped> 
+:deep(.typed){
     color: var(--navbar-icon-color);
 }
 
-.wronglyTyped{
+:deep(.wronglyTyped){
     color: var(--wrongly-typed-color);
     text-decoration: underline;
 }
-.cursor{
+:deep(.cursor){
     color: var(--logo-color);
     position:absolute;
     transform:translateX(-50%) translateY(-5%);

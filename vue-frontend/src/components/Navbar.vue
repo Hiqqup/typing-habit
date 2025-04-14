@@ -25,11 +25,7 @@
 </template>
 
 
-<style scoped>
-    .logoAndH1{
-        display: flex;
-        align-items: center;
-    }
+<style scoped> 
     .navicons{
         display: flex;
         gap:  20px;
@@ -45,6 +41,8 @@
     a {
       color: inherit; /* blue colors for links too */
       text-decoration: inherit; /* no underline */
+      display: flex;
+      align-items: center;
     }
 
 </style>

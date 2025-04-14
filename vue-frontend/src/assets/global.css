@@ -45,15 +45,3 @@ div#app{
 .greyIcon:hover{
   fill: var(--untyped-text-color);
 }
-
-
-/*
-input::-webkit-input-placeholder, input:-ms-input-placeholder, input:-moz-placeholder ,input::-moz-placeholder {
-  font-family: 'Roboto Mono', Arial, Helvetica, sans-serif;
-}
-*/
-/* /*i dont want this to be here* */
-.logoAndH1{
-    display: flex;
-    align-items: center;
-}

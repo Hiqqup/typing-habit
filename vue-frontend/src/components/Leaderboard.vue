@@ -3,19 +3,19 @@
     <table v-html="tableHtml">
     </table>
 </template>
-<style > 
+<style scoped> 
 table{
    border-spacing: 0;   border-collapse: collapse;    
 }
-tr.leaderboardRow > td{
+table:deep(tr > td){
     padding: 8px 42px;
     font-size: 24px;
 }
-tr.leaderboardRow:nth-child(1)>td{
+table:deep(tr:nth-child(1)>td){
     font-size: 16px;
     color: var(--navbar-icon-color)
 }
-tr.leaderboardRow:nth-child(even){
+table:deep(tr:nth-child(even)){
     background-color: var(--darker-background-color) ;
 }
 </style>
@@ -48,7 +48,7 @@ export default{
            lbArray.unshift(["name", "wpm"]);
            for(const entry of lbArray){
             ret+= `
-                <tr class="leaderboardRow">
+                <tr>
                     <td>${entry[0]}</td>
                     <td>${entry[1]}</td>
                 </tr>

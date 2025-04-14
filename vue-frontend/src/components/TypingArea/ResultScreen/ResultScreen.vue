@@ -53,7 +53,7 @@
 }
 .allResults{
     width: 100%;
-};
+}
 </style>
 <script lang="ts">
 import { displayResultChart } from './ResultChart';
